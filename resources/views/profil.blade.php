@@ -24,7 +24,7 @@
     <div class="relative flex items-center justify-center min-h-[calc(100vh-80px)] z-10 p-6">
         <div class="bg-white/60 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border border-white/40 text-center max-w-md w-full">
             <div class="w-24 h-24 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg text-3xl font-bold">FT</div>
-            <h1 class="text-3xl font-extrabold text-slate-900 mb-2">Profil Praktikan</h1>
+            <h1 class="text-3xl font-extrabold text-slate-900 mb-2">Profile</h1>
             <div class="text-slate-600 mb-8 space-y-1">
                 <p class="font-bold text-indigo-700 text-lg">Fathan Tamim</p>
                 <p class="font-medium">24.12.3309</p>
