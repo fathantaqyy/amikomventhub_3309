@@ -9,7 +9,7 @@
         <div class="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <span class="text-3xl font-bold text-indigo-600">PP</span>
         </div>
-        <h1 class="text-3xl font-extrabold text-gray-900 mb-2">Profil Praktikan</h1>
+        <h1 class="text-3xl font-extrabold text-gray-900 mb-2">Profil</h1>
         <div class="text-gray-600 mb-8 space-y-1">
             <p class="font-medium text-indigo-600">Nama: Fathan Tamim</p>
             <p>NIM: 24.12.3309</p>
