@@ -1,5 +1,5 @@
 # Nama
-Fathan Tamim
+Fathan Tamim Taqiyyuddin
 
 # Nim 
 24.12.3309
