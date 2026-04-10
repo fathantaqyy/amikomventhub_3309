@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Profil Praktikan</title>
+    <title>Profil</title>
 </head>
 <body class="bg-gray-50 flex items-center justify-center min-h-screen">
     <div class="bg-white p-10 rounded-2xl shadow-xl border border-gray-100 text-center max-w-md w-full">
