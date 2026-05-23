@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>body { font-family: 'Plus Jakarta Sans', sans-serif; }</style>
+    @yield('extra-styles')
 </head>
 <body class="bg-slate-50 text-slate-900 flex min-h-screen">
     <aside class="w-64 bg-indigo-900 text-indigo-100 flex flex-col p-6 space-y-8 sticky top-0 h-screen">
@@ -19,6 +20,15 @@
             <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-4 py-3 hover:bg-indigo-800 rounded-xl font-bold transition">Dashboard</a>
             <a href="{{ route('admin.events.index') }}" class="flex items-center gap-3 px-4 py-3 {{ request()->routeIs('events.*') ? 'bg-indigo-800 text-white' : '' }} rounded-xl font-bold transition">
                 Kelola Event
+                <a href="{{ route('admin.categories.index') }}"
+   class="flex items-center gap-3 px-4 py-3 {{ request()->routeIs('admin.categories.*') ? 'bg-indigo-800 text-white' : '' }} rounded-xl font-bold transition">
+    Kelola Kategori
+</a>
+<a href="{{ route('admin.partners.index') }}"
+   class="flex items-center gap-3 px-4 py-3 {{ request()->routeIs('admin.partners.*') ? 'bg-indigo-800 text-white' : '' }} rounded-xl font-bold transition">
+    Kelola Partner
+</a>
+
             </a>
         </nav>
     </aside>
@@ -27,5 +37,7 @@
     <main class="flex-1 p-10 overflow-y-auto">
         @yield('content')
     </main>
+    @yield('extra-scripts')
 </body>
+
 </html>

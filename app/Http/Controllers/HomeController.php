@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Partner;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('welcome');
+        $partners = Partner::latest()->get();
+
+        return view('welcome', compact('partners'));
     }
 }

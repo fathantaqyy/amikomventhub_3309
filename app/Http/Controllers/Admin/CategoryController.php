@@ -4,66 +4,65 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Category;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of all categories.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.categories.index');
+        $search = $request->search;
+
+        $categories = Category::withCount('events')
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            })
+            ->latest()
+            ->get();
+
+        return view('admin.categories.index', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new category.
-     */
-    public function create()
-    {
-        return view('admin.categories.create');
-    }
-
-    /**
-     * Store a newly created category in storage.
-     */
     public function store(Request $request)
-    {
-        // TODO: Implement database storage logic
-        return redirect()->route('admin.categories.index')->with('success', 'Kategori berhasil ditambahkan');
-    }
+{
+    $request->validate([
+        'name' => 'required|unique:categories,name'
+    ]);
 
-    /**
-     * Display the specified category.
-     */
-    public function show($id)
-    {
-        // TODO: Implement show logic
-    }
+    \App\Models\Category::create([
+        'name' => $request->name,
+        'slug' => \Illuminate\Support\Str::slug($request->name)
+    ]);
 
-    /**
-     * Show the form for editing the specified category.
-     */
-    public function edit($id)
-    {
-        // TODO: Implement edit logic
-        return view('admin.categories.edit');
-    }
+    return redirect()
+        ->route('admin.categories.index')
+        ->with('success', 'Kategori berhasil ditambahkan');
+}
 
-    /**
-     * Update the specified category in storage.
-     */
     public function update(Request $request, $id)
-    {
-        // TODO: Implement database update logic
-        return redirect()->route('admin.categories.index')->with('success', 'Kategori berhasil diperbarui');
-    }
+{
+    $category = \App\Models\Category::findOrFail($id);
 
-    /**
-     * Remove the specified category from storage.
-     */
-    public function destroy($id)
+    $request->validate([
+        'name' => 'required|unique:categories,name,' . $id
+    ]);
+
+    $category->update([
+        'name' => $request->name,
+        'slug' => \Illuminate\Support\Str::slug($request->name)
+    ]);
+
+    return redirect()
+        ->route('admin.categories.index')
+        ->with('success', 'Kategori berhasil diperbarui');
+}
+
+    public function destroy(Category $category)
     {
-        // TODO: Implement database delete logic
-        return redirect()->route('admin.categories.index')->with('success', 'Kategori berhasil dihapus');
+        $category->delete();
+
+        return redirect()
+            ->route('admin.categories.index')
+            ->with('success', 'Kategori berhasil dihapus');
     }
 }
