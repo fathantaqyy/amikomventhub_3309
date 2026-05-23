@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\EventController as EventAdminController;
 use App\Http\Controllers\HomeController;
@@ -47,8 +46,3 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 
-Route::get('/debug-purgatory', function () {
-    Artisan::call('view:clear'); // Membersihkan cache tampilan Blade
-    Artisan::call('cache:clear'); // Membersihkan cache data aplikasi
-    return "Cache Berhasil Dibersihkan! Silakan cek kembali halaman Partner.";
-});
