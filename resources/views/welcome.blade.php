@@ -154,6 +154,7 @@
     </section>
 
     <!-- Partner Section -->
+     <h1>{{ count($partners) }}</h1>
 <section class="max-w-7xl mx-auto px-6 py-20">
     
     <div class="text-center mb-14">
