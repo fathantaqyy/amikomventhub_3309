@@ -85,22 +85,21 @@ return [
         ],
 
         'pgsql' => [
-            'driver' => 'pgsql',
-            'url' => env('DB_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'laravel'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => env('DB_CHARSET', 'utf8'),
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => 'require',
-            'options' => [
-                'endpoint' => 'ep-sweet-voice-aoh0j8hk',
-            ],
-        ],
+    'driver' => 'pgsql',
+    'host' => 'ep-sweet-voice-aoh0j8hk.aws-ap-southeast-1.pg.laravel.cloud',
+    'port' => '5432',
+    'database' => 'db_eventtiket_3309',
+    'username' => 'db_eventtiket_3309_owner',
+    'password' => 'nO0k6jTSRXfV',
+    'charset' => 'utf8',
+    'prefix' => '',
+    'prefix_indexes' => true,
+    'search_path' => 'public',
+    'sslmode' => 'require',
+    'options' => [
+        'endpoint' => 'ep-sweet-voice-aoh0j8hk',
+    ],
+],
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
