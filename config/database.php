@@ -96,7 +96,10 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'search_path' => 'public',
-            'sslmode' => env('DB_SSLMODE', 'prefer'),
+            'sslmode' => 'require',
+            'options' => [
+                'endpoint' => 'ep-sweet-voice-aoh0j8hk',
+            ],
         ],
 
         'sqlsrv' => [
