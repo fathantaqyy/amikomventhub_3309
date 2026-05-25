@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
- <!-- Hero Section -->
-    <section class="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-12">
+ <section class="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row items-center gap-12">
         <div class="flex-1 space-y-8">
             <span
                 class="inline-block px-4 py-1.5 bg-indigo-100 text-indigo-700 rounded-full text-sm font-bold uppercase tracking-wider">#1
@@ -51,7 +50,6 @@
         </div>
     </section>
 
-    <!-- Events Grid -->
     <section id="events" class="max-w-7xl mx-auto px-6 py-20">
         <div class="flex justify-between items-end mb-12">
             <div>
@@ -64,7 +62,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Event Card 1 -->
             <div
                 class="group bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden">
                 <div class="relative overflow-hidden aspect-[3/4]">
@@ -93,7 +90,6 @@
                 </div>
             </div>
 
-            <!-- Event Card 2 -->
             <div
                 class="group bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden">
                 <div class="relative overflow-hidden aspect-[3/4]">
@@ -122,7 +118,6 @@
                 </div>
             </div>
 
-            <!-- Event Card 3 -->
             <div
                 class="group bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden">
                 <div class="relative overflow-hidden aspect-[3/4]">
@@ -153,40 +148,57 @@
         </div>
     </section>
 
+<<<<<<< Updated upstream
     <!-- Partner Section -->
 <section class="max-w-7xl mx-auto px-6 py-20">
+=======
+    <section class="max-w-7xl mx-auto px-6 py-20">
+>>>>>>> Stashed changes
     
     <div class="text-center mb-14">
         <h2 class="text-4xl font-extrabold mb-4">
             Partner AmikomEventHub
         </h2>
 
-        <p class="text-slate-500 text-lg">
+        <p class="text-slate-500 text-lg mb-8">
             Platform ini didukung oleh berbagai partner terbaik
         </p>
+
+        <form action="{{ url('/') }}" method="GET" class="max-w-md mx-auto flex gap-2">
+            <input type="text" name="search" placeholder="Cari partner..." value="{{ request('search') }}" 
+                class="flex-1 px-6 py-3 rounded-xl border-slate-200 focus:ring-indigo-500 focus:border-indigo-500 shadow-sm border">
+            <button type="submit" class="px-6 py-3 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition">
+                Cari
+            </button>
+        </form>
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-
-        @foreach($partners as $partner)
-
-        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-xl transition text-center">
-
-            <img
-                src="{{ $partner->logo_url }}"
-                alt="{{ $partner->name }}"
-                class="w-24 h-24 object-contain mx-auto mb-4">
+        @forelse($partners as $partner)
+        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-xl transition text-center group">
+            <div class="w-24 h-24 mx-auto mb-4 flex items-center justify-center">
+                <img
+                    src="{{ $partner->logo_url }}"
+                    alt="{{ $partner->name }}"
+                    class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform"
+                    onerror="this.onerror=null;this.src='https://ui-avatars.com/api/?name={{ urlencode($partner->name) }}&background=6366f1&color=fff';">
+            </div>
 
             <h3 class="font-bold text-slate-800">
                 {{ $partner->name }}
             </h3>
-
         </div>
-
-        @endforeach
-
+        @empty
+        <div class="col-span-full text-center py-10">
+            <p class="text-slate-400 italic">Data partner tidak ditemukan.</p>
+        </div>
+        @endforelse
     </div>
 
 </section>
 
+<<<<<<< Updated upstream
     @endsection
+=======
+@endsection
+>>>>>>> Stashed changes
