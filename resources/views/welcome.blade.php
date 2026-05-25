@@ -159,7 +159,7 @@
     
     <div class="text-center mb-14">
         <h2 class="text-4xl font-extrabold mb-4">
-            Partner AmikomEventHub
+            Partner AmikomEventHub keren
         </h2>
 
         <p class="text-slate-500 text-lg">
@@ -191,3 +191,5 @@
 </section>
 
     @endsection
+
+    
