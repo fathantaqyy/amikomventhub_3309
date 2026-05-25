@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Partner;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; // Cukup satu saja di sini
 
 class HomeController extends Controller
 {
