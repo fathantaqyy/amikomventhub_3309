@@ -11,7 +11,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // 1. ATUR REDIRECT DI SINI AGAR TIDAK ERROR 'ROUTE LOGIN NOT DEFINED'
+        $middleware->redirectTo(
+            guests: 'admin/login'
+        );
+
+        // 2. ALIAS MIDDLEWARE ADMIN MILIKMU
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
