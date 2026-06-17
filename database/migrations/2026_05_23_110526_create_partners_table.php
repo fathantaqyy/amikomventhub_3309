@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -11,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
 {
-    Schema::dropIfExists('partners');
+    DB::statement('DROP TABLE IF EXISTS partners CASCADE');
     Schema::create('partners', function (Blueprint $table) {
         $table->id();
         $table->string('name');
