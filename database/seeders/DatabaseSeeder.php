@@ -22,8 +22,10 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // 2. Panggil PartnerSeeder yang baru saja kita buat
+        // 2. Panggil CategorySeeder, EventSeeder, dan PartnerSeeder
         $this->call([
+            CategorySeeder::class,
+            EventSeeder::class,
             PartnerSeeder::class,
         ]);
     }
