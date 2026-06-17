@@ -9,7 +9,8 @@ class HomeController extends Controller
     public function index()
     {
         $partners = Partner::latest()->get();
+        $events = Event::orderBy('date')->take(6)->get();
 
-        return view('welcome', compact('partners'));
+        return view('welcome', compact('partners', 'events'));
     }
 }
