@@ -154,40 +154,48 @@
     </section>
 
     <!-- Partner Section -->
-     <h1>{{ count($partners) }}</h1>
-<section class="max-w-7xl mx-auto px-6 py-20">
-    
-    <div class="text-center mb-14">
-        <h2 class="text-4xl font-extrabold mb-4">
-            Partner AmikomEventHub
-        </h2>
+<section class="bg-slate-50 py-20">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-14">
+            <h2 class="text-4xl font-extrabold mb-4">
+                Partner AmikomEventHub
+            </h2>
 
-        <p class="text-slate-500 text-lg">
-            Platform ini didukung oleh berbagai partner terbaik
-        </p>
-    </div>
-
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-
-        @foreach($partners as $partner)
-
-        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 hover:shadow-xl transition text-center">
-
-            <img
-                src="{{ $partner->logo_url }}"
-                alt="{{ $partner->name }}"
-                class="w-24 h-24 object-contain mx-auto mb-4">
-
-            <h3 class="font-bold text-slate-800">
-                {{ $partner->name }}
-            </h3>
-
+            <p class="text-slate-500 text-lg">
+                Platform ini didukung oleh berbagai partner terbaik
+            </p>
         </div>
 
-        @endforeach
+        @if(count($partners) > 0)
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
 
+            @foreach($partners as $partner)
+
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-slate-100 hover:shadow-lg transition flex items-center justify-center min-h-[150px]">
+
+                <div class="text-center">
+                    <img
+                        src="{{ $partner->logo_url }}"
+                        alt="{{ $partner->name }}"
+                        class="w-16 h-16 object-contain mx-auto mb-3"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Crect fill=%22%23e2e8f0%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%22 y=%2250%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2224%22 fill=%22%2364748b%22%3E?%3C/text%3E%3C/svg%3E'">
+
+                    <h3 class="font-bold text-slate-800 text-sm">
+                        {{ $partner->name }}
+                    </h3>
+                </div>
+
+            </div>
+
+            @endforeach
+
+        </div>
+        @else
+        <div class="text-center py-12">
+            <p class="text-slate-500">Belum ada partner yang terdaftar</p>
+        </div>
+        @endif
     </div>
-
 </section>
 
     @endsection

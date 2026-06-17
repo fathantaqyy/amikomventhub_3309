@@ -17,23 +17,23 @@ class PartnerSeeder extends Seeder
         $partners = [
             [
                 'name' => 'Amikom Yogyakarta',
-                'logo_url' => 'https://via.placeholder.com/150?text=Amikom', // Ganti dengan path gambarmu misal: asset('assets/amikom.png')
+                'logo_url' => 'https://logo.clearbit.com/amikom.ac.id',
             ],
             [
                 'name' => 'Midtrans',
-                'logo_url' => 'https://via.placeholder.com/150?text=Midtrans',
+                'logo_url' => 'https://logo.clearbit.com/midtrans.com',
             ],
             [
                 'name' => 'Dicoding',
-                'logo_url' => 'https://via.placeholder.com/150?text=Dicoding',
+                'logo_url' => 'https://logo.clearbit.com/dicoding.com',
             ],
             [
                 'name' => 'AWS Academy',
-                'logo_url' => 'https://via.placeholder.com/150?text=AWS',
+                'logo_url' => 'https://logo.clearbit.com/aws.amazon.com',
             ],
             [
                 'name' => 'Gojek',
-                'logo_url' => 'https://via.placeholder.com/150?text=Gojek',
+                'logo_url' => 'https://logo.clearbit.com/gojek.com',
             ]
         ];
 
