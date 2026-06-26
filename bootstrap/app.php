@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // Pengecualian CSRF untuk Midtrans Callback ditaruh di sini:
+        $middleware->validateCsrfTokens(except: [
+            '/midtrans/callback', // Sesuaikan dengan URL route POST yang kamu daftarkan di web.php
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
