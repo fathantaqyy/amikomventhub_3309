@@ -108,44 +108,89 @@ class CheckoutController extends Controller
     return view('checkout.success', compact('transaction'));
 }
 
-    public function callback(Request $request)
-{
-    Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-    Config::$isProduction = env('MIDTRANS_IS_PRODUCTION', false);
+//     public function callback(Request $request)
+// {
+//     Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+//     Config::$isProduction = env('MIDTRANS_IS_PRODUCTION', false);
 
-    try {
-        $notification = new \Midtrans\Notification();
+//     try {
+//         $notification = new \Midtrans\Notification();
 
-        $transactionStatus = $notification->transaction_status;
-        $orderId = $notification->order_id;
-        $fraudStatus = $notification->fraud_status;
+//         $transactionStatus = $notification->transaction_status;
+//         $orderId = $notification->order_id;
+//         $fraudStatus = $notification->fraud_status;
 
-        $transaction = Transaction::where('order_id', $orderId)->first();
+//         $transaction = Transaction::where('order_id', $orderId)->first();
 
-        if (!$transaction) {
-            return response()->json(['message' => 'Transaksi tidak ditemukan'], 404);
-        }
+//         if (!$transaction) {
+//             return response()->json(['message' => 'Transaksi tidak ditemukan'], 404);
+//         }
 
-        if ($transactionStatus == 'capture') {
-            if ($fraudStatus == 'challenge') {
-                $transaction->update(['status' => 'Challenge']);
-            } else if ($fraudStatus == 'accept') {
-                $transaction->update(['status' => 'Success']);
+//         if ($transactionStatus == 'capture') {
+//             if ($fraudStatus == 'challenge') {
+//                 $transaction->update(['status' => 'Challenge']);
+//             } else if ($fraudStatus == 'accept') {
+//                 $transaction->update(['status' => 'Success']);
+//             }
+//         } else if ($transactionStatus == 'settlement') {
+//             $transaction->update(['status' => 'Success']);
+//         } else if ($transactionStatus == 'any') {
+//             $transaction->update(['status' => 'Pending']);
+//         } else if ($transactionStatus == 'deny' || $transactionStatus == 'expire' || $transactionStatus == 'cancel') {
+//             $transaction->update(['status' => 'Failed']);
+//             // Opsional: Mengembalikan stok jika transaksi gagal/batal
+//             $transaction->event()->increment('stock');
+//         }
+
+//         return response()->json(['message' => 'Notifikasi Midtrans berhasil diproses']);
+
+//     } catch (\Exception $e) {
+//         return response()->json(['message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
+//     }
+// }
+public function callback(Request $request)
+    {
+        // Gunakan config() bawaan services agar selaras dengan checkout
+        \Midtrans\Config::$serverKey = config('services.midtrans.serverKey');
+        \Midtrans\Config::$isProduction = config('services.midtrans.isProduction');
+
+        try {
+            // Tambahkan backslash global \Midtrans\ di depan Notification
+            $notification = new \Midtrans\Notification();
+
+            $transactionStatus = $notification->transaction_status;
+            $orderId = $notification->order_id;
+            $fraudStatus = $notification->fraud_status;
+
+            $transaction = Transaction::where('order_id', $orderId)->first();
+
+            if (!$transaction) {
+                return response()->json(['message' => 'Transaksi tidak ditemukan'], 404);
             }
-        } else if ($transactionStatus == 'settlement') {
-            $transaction->update(['status' => 'Success']);
-        } else if ($transactionStatus == 'any') {
-            $transaction->update(['status' => 'Pending']);
-        } else if ($transactionStatus == 'deny' || $transactionStatus == 'expire' || $transactionStatus == 'cancel') {
-            $transaction->update(['status' => 'Failed']);
-            // Opsional: Mengembalikan stok jika transaksi gagal/batal
-            $transaction->event()->increment('stock');
+
+            if ($transactionStatus == 'capture') {
+                if ($fraudStatus == 'challenge') {
+                    $transaction->update(['status' => 'Challenge']);
+                } else if ($fraudStatus == 'accept') {
+                    $transaction->update(['status' => 'Success']);
+                }
+            } else if ($transactionStatus == 'settlement') {
+                $transaction->update(['status' => 'Success']);
+            } else if ($transactionStatus == 'pending') {
+                $transaction->update(['status' => 'Pending']);
+            } else if ($transactionStatus == 'deny' || $transactionStatus == 'expire' || $transactionStatus == 'cancel') {
+                $transaction->update(['status' => 'Failed']);
+                
+                // Opsional: Kembalikan stok jika batal
+                if ($transaction->event) {
+                    $transaction->event()->increment('stock');
+                }
+            }
+
+            return response()->json(['message' => 'Notifikasi Midtrans berhasil diproses']);
+
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
         }
-
-        return response()->json(['message' => 'Notifikasi Midtrans berhasil diproses']);
-
-    } catch (\Exception $e) {
-        return response()->json(['message' => 'Terjadi kesalahan: ' . $e->getMessage()], 500);
     }
-}
 }   
