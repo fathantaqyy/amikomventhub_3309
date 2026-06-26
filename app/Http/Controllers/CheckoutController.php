@@ -9,12 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Midtrans\Config;
 use Midtrans\Snap;
-
+use Illuminate\Support\Facades\Log;
 
 class CheckoutController extends Controller
 {
     public function create(Event $event)
     {
+        Log::info('=== MIDTRANS CALLBACK MASUK ===');
+        Log::info($request->all());
         $categories = Category::all();
 
         return view('checkout.create', compact('event', 'categories'));
